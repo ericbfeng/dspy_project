@@ -1,0 +1,2 @@
+# dspyReact
+DSPy application frontend
