@@ -6,3 +6,9 @@
     width: 80vw;
     margin: auto;
 }
+
+.accuracyBlock > img {
+    margin: 10px;
+    position: relative;
+    top: 20px;
+}

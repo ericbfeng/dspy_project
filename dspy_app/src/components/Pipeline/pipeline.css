@@ -7,6 +7,10 @@
     background-color: #636588;
 }
 
+.AccuracyBlock {
+    display: inline-block;
+}
+
 .AccuracyBlock h1 {
     display: inline-block;
 }

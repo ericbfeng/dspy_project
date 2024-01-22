@@ -4,6 +4,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import React from 'react';
 import Box from '@mui/material/Box';
 import AccuracyBlock from './AccuracyBlock';
+import Grow from '@mui/material/Grow';
 
 const pollForProgressMock = (function() {
     let progress = 0;
@@ -36,12 +37,13 @@ export default function Compiling() {
             <Box className="progress">
                 <LinearProgress variant="determinate" value={progress} />
             </Box>
-            {(progress >= 100) && (
+            <Grow in={progress === 100}>
                 <Box className="accuracyBlock">
                     <AccuracyBlock value={20} label={"Initial accuracy"} />
+                    <img src="./right-arrow.png" alt="arrow" width="50px" />
                     <AccuracyBlock value={80} label={"Final accuracy"} />
                 </Box>
-            )}
+            </Grow>
         </div>
     );
 }
