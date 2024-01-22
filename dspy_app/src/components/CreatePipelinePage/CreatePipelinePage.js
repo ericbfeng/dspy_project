@@ -2,6 +2,7 @@ import Box from '@mui/system/Box';
 import Grid from '@mui/material/Grid'; // Import Grid
 import PipelineSelector from './PipelineSelector/PipelineSelector';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 
 
 export default function CreatePipelinePage() { 
@@ -11,6 +12,14 @@ export default function CreatePipelinePage() {
     const optionsForLLM = ["ChatGPT", "LLama"];
     const optionsForPipeline = ["Alpha", "Beta", "Gamma"];
     const optionsForDataset = ["Internal Memos", "Internal Code", "SoSA"];
+
+
+    const handleAddNew = (selectorType) => {
+        console.log(`Add new for ${selectorType}`);
+        // Handle the add new action here, such as opening a modal or navigating
+    };
+
+
 
     return(
 
@@ -30,13 +39,13 @@ export default function CreatePipelinePage() {
             >
              <Grid container spacing={2}>
                 <Grid item xs={4}>
-                    <PipelineSelector defaultValue="LLM" options={optionsForLLM} />
+                    <PipelineSelector defaultValue="LLM" options={optionsForLLM} onAddNew={handleAddNew} />
                 </Grid>
                 <Grid item xs={4}>
-                    <PipelineSelector defaultValue="Pipeline" options={optionsForPipeline} />
+                    <PipelineSelector defaultValue="Pipeline" options={optionsForPipeline}  onAddNew={handleAddNew}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <PipelineSelector defaultValue="Dataset" options={optionsForDataset} />
+                    <PipelineSelector defaultValue="Dataset" options={optionsForDataset} onAddNew={handleAddNew} />
                 </Grid>
             </Grid>
             </Box>
