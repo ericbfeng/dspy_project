@@ -1,0 +1,16 @@
+.Pipeline {
+    border-radius: 5px;
+    width: 75vw;
+    height: 20vh;
+    border: 1px solid black;
+    margin: 26px auto;
+    background-color: #636588;
+}
+
+.AccuracyBlock {
+    display: inline-block;
+}
+
+.AccuracyBlock h1 {
+    display: inline-block;
+}

@@ -1,5 +1,6 @@
 import Header from './components/Header/Header';
 import Default from './components/Default/Default';
+import Compiling from './components/Compiling/Compiling';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreatePipelinePage from './components/CreatePipelinePage/CreatePipelinePage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element = {<Default/>}> </Route>
         <Route path="/create_pipeline" element = {<CreatePipelinePage/>}>P
         </Route>
+        <Route path="/compiling" element = {<Compiling/>}> </Route>
       </Routes>
       </Router>
     </ThemeProvider>
