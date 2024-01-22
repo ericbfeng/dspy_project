@@ -5,6 +5,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import AccuracyBlock from './AccuracyBlock';
 import Grow from '@mui/material/Grow';
+import Results from './Results';
 
 const pollForProgressMock = (function() {
     let progress = 0;
@@ -30,18 +31,27 @@ export default function Compiling() {
         };
     }, []);
 
+    const showResults = progress === 100;
+
     return (
         <div className="Compiling">
             Your selected pipeline:<br />
             <Pipeline />
-            <Box className="progress">
-                <LinearProgress variant="determinate" value={progress} />
-            </Box>
-            <Grow in={progress === 100}>
+            {!showResults && (
+                <Box className="progress">
+                    <LinearProgress variant="determinate" value={progress} />
+                </Box>
+            )}
+            <Grow in={showResults}>
                 <Box className="accuracyBlock">
                     <AccuracyBlock value={20} label={"Initial accuracy"} />
                     <img src="./right-arrow.png" alt="arrow" width="50px" />
                     <AccuracyBlock value={80} label={"Final accuracy"} />
+                </Box>
+            </Grow>
+            <Grow in={showResults} {...(showResults ? { timeout: 1000 } : {})}>
+                <Box>
+                    <Results />
                 </Box>
             </Grow>
         </div>
