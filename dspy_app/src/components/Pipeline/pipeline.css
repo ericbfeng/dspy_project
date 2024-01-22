@@ -6,3 +6,7 @@
     margin: 26px auto;
     background-color: #636588;
 }
+
+.AccuracyBlock h1 {
+    display: inline-block;
+}
