@@ -2,6 +2,11 @@ from app import app
 
 from flask import request, jsonify 
 
+import glob
+import os
+import pandas as pd
+import random
+
 
 @app.route('/')
 @app.route('/index')
@@ -18,4 +23,4 @@ def handle_dspy_backend():
         return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
 
-def scone_setup():
+
