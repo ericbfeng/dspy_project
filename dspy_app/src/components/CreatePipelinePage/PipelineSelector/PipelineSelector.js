@@ -9,17 +9,18 @@ import * as React from 'react';
 
 
 
-export default function PipelineSelector({ defaultValue, options, onAddNew})  { 
+export default function PipelineSelector({ options, onAddNew, onChange })  { 
 
-    const [val, setVal] = React.useState(defaultValue);
+    const [val, setVal] = React.useState("");
 
     const handleChange = (event) => {
       setVal(event.target.value);
+      onChange(event.target.value);
     };
 
     return(
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">{defaultValue}</InputLabel>
+          <InputLabel id="demo-simple-select-label">{val}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -34,7 +35,7 @@ export default function PipelineSelector({ defaultValue, options, onAddNew})  {
             ))}
 
             <Box textAlign="center" mt={1}>
-                <Link href="#" onClick={() => onAddNew(defaultValue)} color="primary">
+                <Link href="#" onClick={onAddNew} color="primary">
                     Add New
                 </Link>
             </Box>

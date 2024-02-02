@@ -2,7 +2,7 @@ import Box from '@mui/system/Box';
 import Grid from '@mui/material/Grid'; // Import Grid
 import PipelineSelector from './PipelineSelector/PipelineSelector';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import { Link } from "react-router-dom";
 import { useState,useEffect } from 'react';
 
 export default function CreatePipelinePage() { 
@@ -19,9 +19,9 @@ export default function CreatePipelinePage() {
     };
 
     const [selectedOptions, setSelectedOptions] = useState({
-        llm: 'LLM',
-        pipeline: 'Pipeline',
-        dataset: 'Dataset',
+        llm: '',
+        pipeline: '',
+        dataset: '',
       });
     
       const handlePipelineCompile = async () => {
@@ -63,25 +63,22 @@ export default function CreatePipelinePage() {
             <Grid container spacing={2}>
               <Grid item xs={4}>
                 <PipelineSelector
-                  defaultValue={selectedOptions.llm}
                   options={optionsForLLM}
-                  onAddNew={handleAddNew}
+                  onAddNew={() => handleAddNew('llm')}
                   onChange={(value) => handlePipelineSelectorChange('llm', value)}
                 />
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
-                  defaultValue={selectedOptions.pipeline}
                   options={optionsForPipeline}
-                  onAddNew={handleAddNew}
+                  onAddNew={() => handleAddNew('pipeline')}
                   onChange={(value) => handlePipelineSelectorChange('pipeline', value)}
                 />
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
-                  defaultValue={selectedOptions.dataset}
                   options={optionsForDataset}
-                  onAddNew={handleAddNew}
+                  onAddNew={() => handleAddNew('dataset')}
                   onChange={(value) => handlePipelineSelectorChange('dataset', value)}
                 />
               </Grid>
@@ -90,15 +87,16 @@ export default function CreatePipelinePage() {
     
           <Grid container justifyContent="center" style={{ marginTop: '20px' }}>
             <Grid item xs={4}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                fullWidth
-                onClick={handlePipelineCompile}
-              >
-                Compile Pipeline
-              </Button>
+              <Link to='/compiling' state={{ ...selectedOptions }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  fullWidth
+                >
+                  Compile Pipeline
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </>
