@@ -1,0 +1,21 @@
+{
+    "Alpha": {
+        "contents": [
+            "COT",
+            "RAG",
+            "Bootstrap"
+        ]
+    },
+    "Beta": {
+        "contents": [
+            "COT",
+            "Bootstrap"
+        ]
+    },
+    "Gamma": {
+        "contents": [
+            "COT",
+            "RAG"
+        ]
+    }
+}

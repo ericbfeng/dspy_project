@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import AccuracyBlock from './AccuracyBlock';
 import Grow from '@mui/material/Grow';
 import Results from './Results';
+import { useLocation } from 'react-router-dom';
 
 const pollForProgressMock = (function() {
     let progress = 0;
@@ -21,6 +22,7 @@ const pollForProgress = pollForProgressMock;
 
 export default function Compiling() {
     const [progress, setProgress] = React.useState(0);
+    const { state: options } = useLocation();
 
     React.useEffect(() => {
         const timer = setInterval(() => {
@@ -36,7 +38,7 @@ export default function Compiling() {
     return (
         <div className="Compiling">
             Your selected pipeline:<br />
-            <Pipeline />
+            <Pipeline pipelineName={options.pipeline} />
             {!showResults && (
                 <Box className="progress">
                     <LinearProgress variant="determinate" value={progress} />
