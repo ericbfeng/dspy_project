@@ -63,6 +63,7 @@ export default function CreatePipelinePage() {
             <Grid container spacing={2}>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="LLM"
                   options={optionsForLLM}
                   onAddNew={() => handleAddNew('llm')}
                   onChange={(value) => handlePipelineSelectorChange('llm', value)}
@@ -70,6 +71,7 @@ export default function CreatePipelinePage() {
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="Pipeline"
                   options={optionsForPipeline}
                   onAddNew={() => handleAddNew('pipeline')}
                   onChange={(value) => handlePipelineSelectorChange('pipeline', value)}
@@ -77,6 +79,7 @@ export default function CreatePipelinePage() {
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="Dataset"
                   options={optionsForDataset}
                   onAddNew={() => handleAddNew('dataset')}
                   onChange={(value) => handlePipelineSelectorChange('dataset', value)}
