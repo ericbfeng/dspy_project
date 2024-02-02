@@ -35,6 +35,25 @@ export default function Compiling() {
 
     const showResults = progress === 100;
 
+    const handlePipelineCompile = async () => {
+        try {
+          // Send a request to the Flask server with the selected options
+          const response = await fetch('http://localhost:5000/execute_pipeline', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(options),
+          });
+    
+          // Handle the response as needed
+          const result = await response.json();
+          console.log('Server response:', result);
+        } catch (error) {
+          console.error('Error compiling pipeline:', error);
+        }
+      };
+
     return (
         <div className="Compiling">
             Your selected pipeline:<br />
