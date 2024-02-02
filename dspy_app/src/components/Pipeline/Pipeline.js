@@ -33,7 +33,7 @@ export default function Pipeline() {
             backgroundColor: 'skyblue', 
             borderRadius: '8px',
           }}>
-            <Typography variant="h6">RAG retrieval system</Typography>
+            <Typography variant="h6">RAG system</Typography>
           </Box>
           <Typography variant="h4" sx={{ color: 'black' }}>→</Typography> 
           <Box sx={{ 

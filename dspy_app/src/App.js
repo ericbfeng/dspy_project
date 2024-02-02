@@ -22,7 +22,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element = {<Default/>}> </Route>
+        <Route path="/" element = {<CreatePipelinePage/>}> </Route>
         <Route path="/create_pipeline" element = {<CreatePipelinePage/>}>P
         </Route>
         <Route path="/compiling" element = {<Compiling/>}> </Route>
