@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import AccuracyBlock from './AccuracyBlock';
 import Grow from '@mui/material/Grow';
 import Results from './Results';
+import { useLocation } from 'react-router-dom';
 
 const pollForProgressMock = (function() {
     let progress = 0;
@@ -21,6 +22,7 @@ const pollForProgress = pollForProgressMock;
 
 export default function Compiling() {
     const [progress, setProgress] = React.useState(0);
+    const { state: options } = useLocation();
 
     React.useEffect(() => {
         const timer = setInterval(() => {
@@ -33,10 +35,29 @@ export default function Compiling() {
 
     const showResults = progress === 100;
 
+    const handlePipelineCompile = async () => {
+        try {
+          // Send a request to the Flask server with the selected options
+          const response = await fetch('http://localhost:5000/execute_pipeline', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(options),
+          });
+    
+          // Handle the response as needed
+          const result = await response.json();
+          console.log('Server response:', result);
+        } catch (error) {
+          console.error('Error compiling pipeline:', error);
+        }
+      };
+
     return (
         <div className="Compiling">
             Your selected pipeline:<br />
-            <Pipeline />
+            <Pipeline pipelineName={options.pipeline} />
             {!showResults && (
                 <Box className="progress">
                     <LinearProgress variant="determinate" value={progress} />

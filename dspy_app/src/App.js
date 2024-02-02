@@ -1,5 +1,4 @@
 import Header from './components/Header/Header';
-import Default from './components/Default/Default';
 import Compiling from './components/Compiling/Compiling';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreatePipelinePage from './components/CreatePipelinePage/CreatePipelinePage';

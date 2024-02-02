@@ -1,7 +1,10 @@
 import './pipeline.css';
 import { Box, Typography } from '@mui/material';
+import pipelineData from '../Data/pipelines.json';
 
-export default function Pipeline() {
+export default function Pipeline({ pipelineName }) {
+    const contents = pipelineData[pipelineName];
+    console.log(contents);
     return (
         <div className="Pipeline">
         <Box sx={{ 

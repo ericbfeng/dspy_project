@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid'; // Import Grid
 import PipelineSelector from './PipelineSelector/PipelineSelector';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 
 export default function CreatePipelinePage() { 
 
@@ -23,25 +23,6 @@ export default function CreatePipelinePage() {
         pipeline: '',
         dataset: '',
       });
-    
-      const handlePipelineCompile = async () => {
-        try {
-          // Send a request to the Flask server with the selected options
-          const response = await fetch('http://localhost:5000/execute_pipeline', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedOptions),
-          });
-    
-          // Handle the response as needed
-          const result = await response.json();
-          console.log('Server response:', result);
-        } catch (error) {
-          console.error('Error compiling pipeline:', error);
-        }
-      };
     
       const handlePipelineSelectorChange = (category, value) => {
         setSelectedOptions((prevOptions) => ({ ...prevOptions, [category]: value }));
@@ -63,6 +44,7 @@ export default function CreatePipelinePage() {
             <Grid container spacing={2}>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="LLM"
                   options={optionsForLLM}
                   onAddNew={() => handleAddNew('llm')}
                   onChange={(value) => handlePipelineSelectorChange('llm', value)}
@@ -70,6 +52,7 @@ export default function CreatePipelinePage() {
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="Pipeline"
                   options={optionsForPipeline}
                   onAddNew={() => handleAddNew('pipeline')}
                   onChange={(value) => handlePipelineSelectorChange('pipeline', value)}
@@ -77,6 +60,7 @@ export default function CreatePipelinePage() {
               </Grid>
               <Grid item xs={4}>
                 <PipelineSelector
+                  label="Dataset"
                   options={optionsForDataset}
                   onAddNew={() => handleAddNew('dataset')}
                   onChange={(value) => handlePipelineSelectorChange('dataset', value)}
