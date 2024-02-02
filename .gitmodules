@@ -1,0 +1,3 @@
+[submodule "flask_backend/data/ScoNe"]
+	path = flask_backend/data/ScoNe
+	url = https://github.com/selenashe/ScoNe.git
