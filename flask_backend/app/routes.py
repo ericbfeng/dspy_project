@@ -21,8 +21,6 @@ def index():
     return "Hello, World!"
 
 
-
-
 @app.route('/dspy_backend', methods=['POST'])
 def handle_dspy_backend():
     if request.is_json:

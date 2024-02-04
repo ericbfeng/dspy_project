@@ -1,3 +1,5 @@
 # Python cache
 *.pyc
 ./flask_backend/venv
+*.log
+.flask_backend/openai_usage.log
