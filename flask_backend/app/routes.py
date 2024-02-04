@@ -11,10 +11,16 @@ from dspy.evaluate import Evaluate
 from dspy.teleprompt import BootstrapFewShotWithRandomSearch
 
 
+
+
+NEW = False
+
 @app.route('/')
 @app.route('/index')
 def index():
     return "Hello, World!"
+
+
 
 
 @app.route('/dspy_backend', methods=['POST'])
@@ -32,14 +38,21 @@ def handle_dspy_backend():
         #setup scone dataset:
         train, dev, test = get_splits()
 
-        print("AFTER")
-        print(len(train))
-        
 
         #evaluators
-        #scone_accuracy = dspy.evaluate.metrics.answer_exact_match
-        #evaluator = Evaluate(devset=test, num_threads=1, display_progress=True, display_table=0)
+        scone_accuracy = dspy.evaluate.metrics.answer_exact_match
+        evaluator = Evaluate(devset=test, num_threads=1, display_progress=True, display_table=0)
 
+
+        premade =  ScoNeCoT()
+
+        premade.load('data/Bootsrapped/scone-cot_fewshot-turbo-gpt4-demos.json') 
+
+        cot_fewshot =  bootstrap(train, dev) if NEW else premade
+        
+
+
+        #set key to do this:
         #evaluator(cot_fewshot, metric=scone_accuracy)
 
 
