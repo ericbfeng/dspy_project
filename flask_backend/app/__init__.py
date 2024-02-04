@@ -2,6 +2,7 @@ from flask import Flask
 import os
 import subprocess
 
+
 app = Flask(__name__)
 
 scone_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'ScoNe')

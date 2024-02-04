@@ -9,6 +9,9 @@ import random
 import dspy
 from dspy.evaluate import Evaluate
 from dspy.teleprompt import BootstrapFewShotWithRandomSearch
+from dotenv import load_dotenv
+
+import openai
 
 
 
@@ -24,12 +27,20 @@ def index():
 @app.route('/dspy_backend', methods=['POST'])
 def handle_dspy_backend():
     if request.is_json:
+
         data = request.get_json()
+
+        load_dotenv()
+
+        api_key = os.getenv("API_KEY")
+
+        openai.api_key = api_key
 
         random.seed(1)
 
         turbo = dspy.OpenAI(model='gpt-3.5-turbo-1106', max_tokens=250, model_type='chat')
         dspy.settings.configure(lm=turbo)
+
 
         gpt4T = dspy.OpenAI(model='gpt-4-1106-preview', max_tokens=350, model_type='chat')
 
@@ -51,8 +62,12 @@ def handle_dspy_backend():
 
 
         #set key to do this:
-        #evaluator(cot_fewshot, metric=scone_accuracy)
+        evaluator(cot_fewshot, metric=scone_accuracy)
 
+
+
+        cot_fewshot.forward( "The man is not steering a larger sedan", "Can we logically conclude for sure that the man is not steering a car?")
+        turbo.inspect_history(n=3)
 
         return jsonify({"status": "success", "message": "JSON received"}), 200
     else:
