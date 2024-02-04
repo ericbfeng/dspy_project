@@ -4,3 +4,4 @@
 *.log
 .flask_backend/openai_usage.log
 ./flask_backend/.env
+*.env
