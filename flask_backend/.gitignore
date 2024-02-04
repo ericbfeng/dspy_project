@@ -1,6 +1,7 @@
 # Python cache
 *.pyc
 ./flask_backend/venv
+./flask_backend/myvenv
 *.log
 .flask_backend/openai_usage.log
 ./flask_backend/.env
