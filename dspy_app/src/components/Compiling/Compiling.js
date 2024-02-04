@@ -56,7 +56,7 @@ export default function Compiling() {
 
     return (
         <div className="Compiling">
-            Your selected pipeline:<br />
+            Your selected pipeline: {options.pipeline}<br />
             <Pipeline pipelineName={options.pipeline} />
             {!showResults && (
                 <Box className="progress">
