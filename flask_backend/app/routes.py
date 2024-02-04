@@ -22,9 +22,7 @@ def handle_dspy_backend():
     if request.is_json:
         data = request.get_json()
 
-
         random.seed(1)
-
 
         turbo = dspy.OpenAI(model='gpt-3.5-turbo-1106', max_tokens=250, model_type='chat')
         dspy.settings.configure(lm=turbo)
@@ -33,17 +31,16 @@ def handle_dspy_backend():
 
         #setup scone dataset:
         train, dev, test = get_splits()
+
+        print("AFTER")
+        print(len(train))
         
 
         #evaluators
-        scone_accuracy = dspy.evaluate.metrics.answer_exact_match
-        evaluator = Evaluate(devset=test, num_threads=1, display_progress=True, display_table=0)
+        #scone_accuracy = dspy.evaluate.metrics.answer_exact_match
+        #evaluator = Evaluate(devset=test, num_threads=1, display_progress=True, display_table=0)
 
-        evaluator(cot_fewshot, metric=scone_accuracy)
-
-
-        
-
+        #evaluator(cot_fewshot, metric=scone_accuracy)
 
 
         return jsonify({"status": "success", "message": "JSON received"}), 200
@@ -53,24 +50,22 @@ def handle_dspy_backend():
 
 
 
-
-
-
-
-
 def get_splits(): 
 
-    all_train = load_scone("ScoNe/scone_nli/train")
+    all_train = load_scone("data/ScoNe/scone_nli/train")
+
+
     random.shuffle(all_train)
+
 
     # 200 random train, 50 random dev:
     train, dev = all_train[: 200], all_train[200: 250]
 
-    test = load_scone(dirname=f"ScoNe/scone_nli/test")
+    test = load_scone(dirname=f"data/ScoNe/scone_nli/test")
     test = [ex for ex in test if ex.category == "one_scoped"]
 
 
-    train, dev, test
+    return train, dev, test
 
 
 
