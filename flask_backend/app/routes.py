@@ -2,8 +2,11 @@ from app import app
 
 from flask import request, jsonify 
 
+
 import glob
 import os
+import io
+import sys
 import pandas as pd
 import random
 import dspy
@@ -12,7 +15,6 @@ from dspy.teleprompt import BootstrapFewShotWithRandomSearch
 from dotenv import load_dotenv
 
 import openai
-
 
 
 
@@ -29,6 +31,24 @@ def handle_dspy_backend():
     if request.is_json:
 
         data = request.get_json()
+
+
+        query = data.get('query', None)
+        if query is None:
+            # If the query key is not present, return an error
+            return jsonify({"status": "error", "message": "Query not correctly provided"}), 400
+
+        premise_indicator = "Context:"
+        question_indicator = "Question:"
+        if premise_indicator in query and question_indicator in query:
+            # Splitting the query to extract premise and question
+            try:
+                premise_part, question_part = query.split(question_indicator)
+                premise = premise_part.split(premise_indicator)[1].strip()
+                question = question_part.strip()
+            except Exception as e:
+                return jsonify({"status": "error", "message": "Failed to parse premise and question from query"}), 400
+
 
         load_dotenv()
 
@@ -66,10 +86,31 @@ def handle_dspy_backend():
 
 
 
-        cot_fewshot.forward( "The man is not steering a larger sedan", "Can we logically conclude for sure that the man is not steering a car?")
-        turbo.inspect_history(n=3)
+        a = cot_fewshot.forward( premise, question)
+        
+        
 
-        return jsonify({"status": "success", "message": "JSON received"}), 200
+        original_stdout = sys.stdout  # Save a reference to the original standard output
+        captured_output = io.StringIO()  # Create a StringIO object to capture output
+        sys.stdout = captured_output
+        turbo.inspect_history(n=1)
+        sys.stdout = original_stdout
+
+        print(a.answer)
+        print(a.rationale)
+        print(captured_output)
+
+
+        captured_output.seek(0)
+
+        # Extract the string content from the StringIO object
+        extracted_string = captured_output.getvalue()
+
+
+        print("TESTING")
+        #print(extracted_string)
+
+        return jsonify({"status": "success", "message": "JSON received", "answer": a.answer, "rationale": a.rationale, "raw": extracted_string }), 200
     else:
         return jsonify({"status": "error", "message": "Request must be JSON"}), 400
 
