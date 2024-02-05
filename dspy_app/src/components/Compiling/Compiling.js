@@ -38,7 +38,7 @@ export default function Compiling() {
     const handlePipelineCompile = async () => {
         try {
           // Send a request to the Flask server with the selected options
-          const response = await fetch('http://localhost:5000/execute_pipeline', {
+          const response = await fetch('http://localhost:5000/pipelineCompile', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -65,9 +65,9 @@ export default function Compiling() {
             )}
             <Grow in={showResults}>
                 <Box className="accuracyBlock">
-                    <AccuracyBlock value={20} label={"Initial accuracy"} />
+                    <AccuracyBlock value={21.3} label={"Initial accuracy"} />
                     <img src="./right-arrow.png" alt="arrow" width="50px" />
-                    <AccuracyBlock value={80} label={"Final accuracy"} />
+                    <AccuracyBlock value={86.1} label={"Final accuracy"} />
                 </Box>
             </Grow>
             <Grow in={showResults} {...(showResults ? { timeout: 1000 } : {})}>

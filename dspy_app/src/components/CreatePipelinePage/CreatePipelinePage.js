@@ -11,7 +11,7 @@ export default function CreatePipelinePage() {
 
     const optionsForLLM = ["ChatGPT", "LLama"];
     const optionsForPipeline = ["Alpha", "Beta", "Gamma"];
-    const optionsForDataset = ["Internal Memos", "Internal Code", "SoSA"];
+    const optionsForDataset = ["Internal Memos", "Internal Code", "ScoNe"];
 
     const handleAddNew = (selectorType) => {
         console.log(`Add new for ${selectorType}`);

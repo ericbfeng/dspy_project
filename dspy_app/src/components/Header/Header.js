@@ -30,7 +30,7 @@ export default function Header() {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    MyLLM
+                    MyLM
                 </Typography>
                 <Divider orientation="vertical" flexItem />
                 <Button color="inherit" onClick={handleCreatePipelineClick}>Create New Pipelines</Button>
