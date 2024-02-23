@@ -1,2 +1,1 @@
-# dspyReact
-DSPy application frontend
+DSPY wrapper
